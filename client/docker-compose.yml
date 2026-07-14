@@ -1,0 +1,12 @@
+services:
+  hopgate:
+    build: .
+    # Mount the host's agent config dirs so the container edits them in place.
+    volumes:
+      - ${HOME}/.claude:/root/.claude
+      - ${HOME}/.config/hopgate:/root/.config/hopgate
+      # Later, for codex/desktop adapters:
+      # - ${HOME}/.codex:/root/.codex
+      # - ${HOME}/.config/Claude:/root/.config/Claude
+# Usage: docker compose run --rm hopgate on claude-code
+#        docker compose run --rm hopgate status

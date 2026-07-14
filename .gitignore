@@ -2,3 +2,11 @@
 *.local
 .idea/
 .vscode/
+
+# Secrets — never commit
+server/tokens.json
+config.toml
+
+# Python
+__pycache__/
+*.pyc

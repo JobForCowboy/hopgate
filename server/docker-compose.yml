@@ -1,0 +1,9 @@
+services:
+  hopgate:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./allowlist.txt:/app/allowlist.txt:ro
+      - ./tokens.json:/app/tokens.json

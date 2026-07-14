@@ -1,0 +1,16 @@
+# Destination hosts hopgate will tunnel to (CONNECT, port 443 only).
+# One host per line. A leading dot means "this domain and any subdomain".
+# Lines starting with # are comments.
+
+# Anthropic / Claude
+api.anthropic.com
+claude.ai
+platform.claude.com
+.anthropic.com
+.claude.ai
+.claude.com
+
+# OpenAI / Codex
+api.openai.com
+chatgpt.com
+.openai.com
