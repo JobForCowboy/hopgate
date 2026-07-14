@@ -73,14 +73,28 @@ docker compose run --rm hopgate on claude-code
 
 Restart the agent after toggling so it picks up the new proxy setting.
 
-**Agent support:** Claude Code works today. Codex and Claude Desktop route via
-environment variables rather than a single config file — their adapters are
-stubbed and coming next. Client currently targets Linux hosts.
+### Claude Desktop
+
+Claude Desktop is an Electron/Chromium app: it can't send the proxy token
+silently the way Claude Code can. So `on desktop` does two things on the **host**
+(not in the container — the shim and Desktop must share loopback):
+
+1. starts a small no-auth loopback shim (`shim.py`) on `127.0.0.1:8899` that
+   injects the token and forwards to the jump host;
+2. writes a user-level launcher override (`~/.local/share/applications/…`) that
+   shadows the system one and adds `--proxy-server=http://127.0.0.1:8899`.
+
+`off desktop` removes the override and stops the shim. Restart Claude Desktop
+after toggling. Because the shim must be running while Desktop is open, run the
+desktop toggle from the host (`python3 cli.py on desktop`), not the container.
+
+**Agent support:** Claude Code and Claude Desktop work today. Codex is stubbed
+and coming next. Client currently targets Linux hosts.
 
 ## Status
 
-Working MVP: server proxy + Claude Code client toggle. Codex/Desktop adapters and
-a browser GUI are next.
+Working MVP: server proxy + Claude Code and Claude Desktop client toggles.
+Codex adapter and a browser GUI are next.
 
 ## License
 
